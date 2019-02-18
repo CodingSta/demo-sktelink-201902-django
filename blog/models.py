@@ -13,3 +13,11 @@ class Comment(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+"""
+class ZipCode(models.Model):
+    # code = models.CharField(max_length=6, primary_key=True)
+    code = models.CharField(max_length=6, unique=True)
+    desc = models.TextField()
+"""
