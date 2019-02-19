@@ -28,7 +28,9 @@
                         <img src="https://mblogthumb-phinf.pstatic.net/20150701_201/whdrnr95_1435721605440cJvNE_JPEG/DSC_0035.jpg?type=w2" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">
-                                #{{ shop.id }}. {{ shop.name }}
+                                <a href="/shop/{{ shop.id }}/">
+                                    #{{ shop.id }}. {{ shop.name }}
+                                </a>
                             </h5>
                             {% if shop.address %}
                                 <p class="card-text">
