@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from .models import Shop
 
-# Create your views here.
+
+def index(request):
+    # 전체 Shop 목록을 가져올 예정이다. (Lazy한 특성)
+    qs = Shop.objects.all()
+    return render(request, 'shop/shop_list.html', {
+        'shop_list': qs,
+    })
