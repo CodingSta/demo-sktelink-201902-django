@@ -4,3 +4,5 @@ requests
 beautifulsoup4
 pillow
 django-debug-toolbar
+
+django-heroku
