@@ -12,6 +12,7 @@ def root(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('bot/', include('bot.urls')),
     path('shop/', include('shop.urls')),
     path('', root),
 ]
