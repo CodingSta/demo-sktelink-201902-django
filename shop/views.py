@@ -12,7 +12,17 @@ from .forms import ShopForm
 #         'shop_list': qs,
 #     })
 
-index = ListView.as_view(model=Shop)
+class PostListView(ListView):
+    model = Shop
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context.update({
+            'hello': 'world',
+        })
+        return context
+
+index = PostListView.as_view()
 
 
 # def shop_detail(request, pk):
