@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Shop
+from .forms import ShopForm
 
 
 def index(request):
@@ -15,4 +16,20 @@ def shop_detail(request, pk):
     shop = Shop.objects.get(pk=pk)
     return render(request, 'shop/shop_detail.html', {
         'shop': shop,
+    })
+
+
+def shop_new(request):
+    form_cls = ShopForm
+
+    if request.method == "POST":  # "GET", "POST"
+        form = form_cls(request.POST, request.FILES)
+        if form.is_valid():
+            shop = form.save()
+            return redirect('/shop/{}/'.format(shop.id))
+    else:
+        form = form_cls()
+
+    return render(request, 'shop/shop_form.html', {
+        'form': form,
     })
