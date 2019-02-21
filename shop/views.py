@@ -62,3 +62,10 @@ def shop_edit(request, pk):
     return render(request, 'shop/shop_form.html', {
         'form': form,
     })
+
+
+from django.views.generic import UpdateView
+
+shop_edit_cbv = UpdateView.as_view(
+    model=Shop, form_class=ShopForm,
+    success_url='/shop/')
