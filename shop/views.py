@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -36,7 +37,7 @@ index = PostListView.as_view()
 shop_detail = DetailView.as_view(model=Shop)
 
 
-
+@login_required
 def shop_new(request):
     form_cls = ShopForm
 
@@ -56,6 +57,7 @@ shop_new_cbv = CreateView.as_view(
     model=Shop, form_class=ShopForm)
 
 
+@login_required
 def shop_edit(request, pk):
     # try:
     #     shop = Shop.objects.get(pk=pk)
@@ -84,16 +86,17 @@ shop_edit_cbv = UpdateView.as_view(
     model=Shop, form_class=ShopForm)
 
 
-# def shop_delete(request, pk):
-#     shop = get_object_or_404(Shop, pk=pk)
+@login_required
+def shop_delete(request, pk):
+    shop = get_object_or_404(Shop, pk=pk)
 
-#     if request.method == 'POST':
-#         shop.delete()
-#         return redirect('shop:index')
+    if request.method == 'POST':
+        shop.delete()
+        return redirect('shop:index')
 
-#     return render(request, 'shop/shop_confirm_delete.html', {
-#         'shop': shop,
-#     })
+    return render(request, 'shop/shop_confirm_delete.html', {
+        'shop': shop,
+    })
 
-shop_delete = DeleteView.as_view(model=Shop,
-                                 success_url=reverse_lazy('shop:index'))
+# shop_delete = DeleteView.as_view(model=Shop,
+#                                  success_url=reverse_lazy('shop:index'))
