@@ -44,7 +44,9 @@ def shop_new(request):
     if request.method == "POST":  # "GET", "POST"
         form = form_cls(request.POST, request.FILES)
         if form.is_valid():
-            shop = form.save()
+            shop = form.save(commit=False)
+            shop.user = request.user
+            shop.save()
             return redirect(shop)
     else:
         form = form_cls()
