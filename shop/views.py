@@ -68,6 +68,9 @@ def shop_edit(request, pk):
 
     shop = get_object_or_404(Shop, pk=pk)
 
+    if request.user != shop.user:
+        return redirect(shop)
+
     form_cls = ShopForm
 
     if request.method == "POST":  # "GET", "POST"
@@ -91,6 +94,9 @@ shop_edit_cbv = UpdateView.as_view(
 @login_required
 def shop_delete(request, pk):
     shop = get_object_or_404(Shop, pk=pk)
+
+    if request.user != shop.user:
+        return redirect(shop)
 
     if request.method == 'POST':
         shop.delete()
